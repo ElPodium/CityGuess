@@ -28,10 +28,10 @@
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
             <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                Sign In
+                <a href="../login.php">Sign In</a>
             </button>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                Sign Up
+                <a href="../signup.php">Sign Up</a>
             </button>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 Play as a Guest
             </button>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                Sign In
+                <a href="../login.php">Sign In</a>
             </button>
         </div>  
     </div>
