@@ -1,3 +1,52 @@
+<?php 
+
+    // check en amont si email ou pseudo pas déjà dans la base (existing user)
+    session_start();
+    if (isset($_SESSION['username']) && isset($_SESSION['userid'])) 
+        header("Location: /");
+
+    if ($_SESSION["islogged"] == 'true')
+        header("Location: /");
+
+
+    if (isset($_POST['register'])) {
+        if ($_POST['password'] != $_POST['password2']) {
+            echo "password mismatch";
+        } else {
+            $username = $_POST['username'];
+            $email = $_POST['email'];
+            $passhash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            
+            if (register($username, $email, $passhash)) {
+                echo "registration, OK";
+            } else {
+                echo "registration failed";
+            }
+        }
+        
+    }
+
+    function register($username, $email, $passhash) {
+		require('./sql.php'); //$pdo est défini dans ce fichier
+		$sql="INSERT INTO ACCOUNTS VALUES (:username, :email, :password)";
+        
+		try {
+            $insert = $pdo->prepare("INSERT INTO `accounts` ( `username`, `email`, `password` ) values('".$username."', '".$email."', '".$passhash."') ");
+			$bool = $insert->execute();
+			if ($bool) {
+				return true;
+			} else {
+                return false;
+            }
+		}
+		catch (PDOException $e) {
+			echo utf8_encode("Echec de select : " . $e->getMessage() . "\n");
+			die(); // On arrête tout.
+		}
+	}
+
+?>
+
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -30,29 +79,29 @@
                 Create your account
             </div>
             
-            <form class="mt-8">
+            <form class="mt-8" method="POST">
                 <div class="mx-auto max-w-lg">
                 <div class="py-2">
                     <span class="px-1 text-sm text-gray-600">Username</span>
-                    <input placeholder="" type="text"
+                    <input name="username" placeholder="" type="text"
                     class="text-md block px-3 py-2  rounded-lg w-full 
-                    bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none">
+                    bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" required>
                 </div>
                 <div class="py-2">
                     <span class="px-1 text-sm text-gray-600">Email address</span>
-                    <input placeholder="" type="text"
+                    <input name="email" placeholder="" type="email"
                     class="text-md block px-3 py-2  rounded-lg w-full 
-                    bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none">
+                    bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md focus:placeholder-gray-500 focus:bg-white focus:border-gray-600 focus:outline-none" required>
                 </div>
                 <div class="py-2" x-data="{ show: true }">
                     <span class="px-1 text-sm text-gray-600">Password</span>
                     <div class="relative">
-                    <input placeholder="" :type="show ? 'password' : 'text'" class="text-md block px-3 py-2 rounded-lg w-full 
+                    <input name="password" placeholder="" :type="show ? 'password' : 'text'" class="text-md block px-3 py-2 rounded-lg w-full 
                     bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
                     focus:placeholder-gray-500
                     focus:bg-white 
                     focus:border-gray-600  
-                    focus:outline-none">
+                    focus:outline-none" required>
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 
                         <svg class="h-6 text-gray-700" fill="none" @click="show = !show"
@@ -77,17 +126,17 @@
                 <div class="py-2" x-data="{ show: true }">
                     <span class="px-1 text-sm text-gray-600">Repeat password</span>
                     <div class="relative">
-                    <input placeholder="" :type="show ? 'password' : 'text'" class="text-md block px-3 py-2 rounded-lg w-full 
+                    <input name="password2" placeholder="" :type="show ? 'password' : 'text'" class="text-md block px-3 py-2 rounded-lg w-full 
                     bg-white border-2 border-gray-300 placeholder-gray-600 shadow-md
                     focus:placeholder-gray-500
                     focus:bg-white 
                     focus:border-gray-600  
-                    focus:outline-none">
+                    focus:outline-none" required>
                     </div>
                 </div>
                 <div class="flex justify-between"><label class="block text-gray-500 font-bold my-4"><input type="checkbox"
-                        class="leading-loose text-pink-600"> <span class="py-2 text-sm text-gray-600 leading-snug">You accept <a class="underline" href="./tos.php">Terms & Conditions</a>
-                        </span></label></label></div> <button class="mt-3 text-lg font-semibold 
+                        class="leading-loose text-pink-600" required> <span class="py-2 text-sm text-gray-600 leading-snug">You accept <a class="underline" href="./tos.php">Terms & Conditions</a>
+                        </span></label></label></div> <button type="submit" name="register" class="mt-3 text-lg font-semibold 
                     bg-gray-800 w-full text-white rounded-lg
                     px-6 py-3 block shadow-xl hover:text-white hover:bg-black">
                     Login

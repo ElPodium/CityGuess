@@ -28,7 +28,7 @@
             </button>
             <div class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
                 <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 border border-red-700 rounded">
-                    Sign Out
+                    <a href="../signout.php">Sign Out</a>
                 </button>
             </div>
         </div>

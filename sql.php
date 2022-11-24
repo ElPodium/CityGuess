@@ -1,7 +1,7 @@
 <?php
 	//$hostname = "vs-wamp";
-	$hostname = "localhost";	
-	$base= "econtact";
+	$hostname = "localhost";
+	$base= "cityguess";
 	//$loginBD= "econtact";	
 	$loginBD= "root";	
 	//$passBD="econtact";
@@ -28,4 +28,4 @@
 		echo utf8_encode("Error while connecting to the database : " . $e->getMessage() . "\n");
 		die(); // On arrête tout.
 	}
-?>	
+?>

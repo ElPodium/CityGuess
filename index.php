@@ -1,7 +1,13 @@
 <?php
 	session_start();
-	$_SESSION["islogged"] = 'false';
-	$_SESSION["username"] = 'Guest';
+	
+	if (!isset($_SESSION['firstlogin'])) {
+		$_SESSION['firstlogin'] = 'false';
+		$_SESSION["islogged"] = 'false';
+		$_SESSION["username"] = 'Guest';
+		header('Location: /');
+		exit;
+	}
 
 	// $nom = isset($_POST['nom'])?$_POST['nom']:'';
 	// $num = isset($_POST['num'])?$_POST['num']:'';
