@@ -1,4 +1,3 @@
-
 const elements = [];
 
 var video;
@@ -11,23 +10,19 @@ var latlngfind;
 var cityfind;
 
 function main(){
-    var divsToHide = document.getElementsByClassName("cacher");
-    for(var i = 0; i < divsToHide.length; i++){
-        divsToHide[i].style.display = "none"; // depending on what you're doing
-        divsToHide[i].style.visibility = "hidden"; // or
-    }
+    /*
     video = document.getElementById('video');
-    elements.push(video);
+    elements.push(video);*/
     //video.playbackRate = 0.9;
     map = L.map('map').setView([51.505, -0.09], 7);
     //cercle = L.circle();
 
-    startGameButton = document.getElementById('startGame');
+    /*startGameButton = document.getElementById('startGame');
     elements.push(startGameButton);
-    startGameButton.addEventListener("click", startGame);
+    startGameButton.addEventListener("click", startGame);*/
+    startGame();
 
 }
-
 
 function startGame(){
     generateCoordinates();
@@ -35,26 +30,6 @@ function startGame(){
 }
 
 function generateCoordinates(){
-
- /*var urle = "https://geocode.xyz/london";
-    var donné = {
-        "json":1,
-    };
-   var url= "https://wft-geo-db.p.rapidapi.com/v1/geo/citi";
-    params= {minPopulation: '10000'}
-    $.ajax({
-        url : urle, 
-        data : donné,
-        method : "GET",
-        dataType : "JSON",
-        success: function(retour){
-           console.log(retour.longt + " " + retour.latt);
-        },
-        error : function() {
-            alert("PB avec l'URL");
-        }	
-    });*/
- 
 }    
 
 function loadGamePage(){
@@ -62,22 +37,7 @@ function loadGamePage(){
 }
 
 function hideElements(){
-    var divsToHide = document.getElementsByClassName("hide"); //divsToHide is an array
-    for(var i = 0; i < divsToHide.length; i++){
-        divsToHide[i].style.visibility = "hidden"; // or
-        divsToHide[i].style.display = "none"; // depending on what you're doing
-    }
-    var divsToHides = document.getElementsByClassName("cacher");
-    for(var i = 0; i < divsToHides.length; i++){
-        divsToHides[i].style.display = "block"; // depending on what you're doing
-        divsToHides[i].style.visibility = "visible"; // or
-    }
-    // alert(elements);
-    // for (let x in elements){
-    //     elements[x].hidden = true;
-    // }
     mapleeflet();
-    //streetviewgenerator();
 }
 
 function mapleeflet(){
@@ -92,12 +52,6 @@ function onMapClick(e) {
     confirmerButton = document.getElementById('confirmer');
     var marker = L.marker([e.latlng.lat, e.latlng.lng]);
     marker.addTo(map);
-    /*cercle = L.circleMarker(e.latlng, {
-        radius: 20,
-        stroke: false,
-        fillColor: 'red',
-        fillOpacity: 0.5
-      }).addTo(map);*/
       latlngfind = e.latlng;
     confirmerButton.addEventListener("click", ville);
     
@@ -135,7 +89,6 @@ function ville(){
                 [retour[0].lat, retour[0].lon],
                 [latlngfind.lat, latlngfind.lng]
             ];
-            
             var polyline = L.polyline(latlngs, {color: 'red'}).addTo(map);
          },
          error : function() {
@@ -149,14 +102,21 @@ function streetviewgenerator(){
         url : "https://random-ize.com/random-map/map-f.php", 
         method : "GET",
         dataType : "JSON",
+        header: {
+            'Access-Control-Allow-Origin': '*',
+        },
+        beforeSend: function(xhr){
+            xhr.setRequestHeader ("Authorization", "Basic" + btoa(""));
+        },
         success: function(retour){
-           document.getElementById('map').innerHTML(retour);
+           console.log(retour);
         },
         error : function() {
             alert("PB avec l'URL");
         }	
     });
 }
+
 
 
 
