@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Access-Control-Allow-Origin" content="*" />
         <link rel="shortcut icon" type="image/x-icon" href="./assets/logo.png" />
         <title>City Guess</title>
 
@@ -18,6 +19,7 @@
 
     </head>
   <body onload="main()">
+    <iframe class="h-screen w-screen bg-blend-multiply" src="https://www.google.com/maps/embed?pb=!4v1590823934955!6m8!1m7!1sWEs-qdU21-glLuy-zM0Zxw!2m2!1d12.09499334601633!2d105.0286196595452!3f66.04405!4f0!5f0.7820865974627469" allowfullscreen></iframe>
     <div class="flex items-end justify-end bg-opacity-10">
     <div class="cacher relative border-2 border-#BBCBC4-400 px-4 py-2 w-96 ml-4 rounded">
         <p class="text-start text-m py-2 px-1">Score : 0/5</p>
@@ -32,22 +34,5 @@
         </div>
     </div>
     </div>
-    <div>
-        <button class=" hide absolute top-5 right-5 text-white border border-white hover:text-[#987369] py-2 px-4 rounded z-30 uppercase text-sm font-bold hover:bg-white hover:bg-opacity-50">
-            Sign in
-        </button>        
-    </div>
-
-    <header class="hide relative flex items-center justify-center h-screen  overflow-hidden" >
-        <div class="hide z-30 p-5 text-2xl text-white grid place-items-center">
-            <h1 class="text-2xl text-white z-20  font-bold pb-4 uppercase">Welcome to City Guess</h1>
-
-            <button type="button" id='startGame' class="cursor-pointer rounded-lg border-2 border-gray-200  px-8 py-2.5 text-white font-medium text-lg leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out">Start game</button>
-        </div>
-
-        <video autoplay loop muted id="video" class="hide absolute z-10 w-auto min-w-full min-h-full max-w-none blur-sm transform transition-all duration-1500 ease-out " >
-            <source src="./assets/city.mp4" type="video/mp4" />  Your browser does not support the video tag.
-        </video>
-    </header>
   </body>
 </html>
