@@ -66,35 +66,11 @@ function onMapClick(e) {
         map.removeLayer(markers[0]);
         markers.splice(0, 1);
     } 
-    confirmerButton.addEventListener("click", ville);
-}
-
-function ville(){
-    map.removeEventListener("click", onMapClick);
-    /*var url = "https://us1.locationiq.com/v1/reverse"
-    var datas = {
-        key : "pk.938afe8c6000b6dd94d2262604cb7ebb",
-        lat : latlngfind.lat,
-        lon : latlngfind.lng,
-        format : "json"
-    };
-    $.ajax({
-        url: url,
-        data : datas,
-        method:"GET",
-        dataType:"JSON",
-        success: function(retour){
-            cityfind = retour.address.town;
-         },
-         error : function() {
-             alert("PB avec l'URL");
-         }	
-    });*/
-    VilleAtrouver();
+    confirmerButton.addEventListener("click", VilleAtrouver);
 }
 
 function VilleAtrouver(){
-    confirmerButton.removeEventListener("click", ville);
+    map.removeEventListener("click", onMapClick);
     var url2 = "https://us1.locationiq.com/v1/search"
     var datas = {
         key : "pk.938afe8c6000b6dd94d2262604cb7ebb",
@@ -127,9 +103,10 @@ function VilleAtrouver(){
 
 function DistanceVille(from, to)
 {
+    confirmer.removeEventListener("click", VilleAtrouver);
     var distanceKm=from.distanceTo(to).toFixed(0)/1000;
     document.getElementById("distance").innerText = "Distance : " + distanceKm + " km";
-    resultat = 100000 - (distanceKm*10);
+    resultat = 100000 - (distanceKm*100);
     if(resultat < 0){
         resultat = 0;
     }
@@ -180,8 +157,6 @@ function streetviewgenerator() {
             </iframe>`);
 
             console.log(cityfind);
-           
-
         }, 
         error: function() { 
           console.log(arguments); 
@@ -190,6 +165,3 @@ function streetviewgenerator() {
 
       
 }
-
-
-
