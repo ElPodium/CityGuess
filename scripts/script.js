@@ -1,7 +1,7 @@
 var confirmerButton;
 var map;
 var latlngfind;
-//var cityfind;
+var cityfind;
 var moinButton;
 var pleinecran;
 var tour;
@@ -10,6 +10,7 @@ var distances;
 var markers = new Array();
 
 function main(){
+    streetviewgenerator();
     map = L.map('map').setView([51.505, -0.09], 7);
     moinButton = document.getElementById("minus");
     pleinecran = document.getElementById("pleinecran");
@@ -97,7 +98,7 @@ function VilleAtrouver(){
     var url2 = "https://us1.locationiq.com/v1/search"
     var datas = {
         key : "pk.938afe8c6000b6dd94d2262604cb7ebb",
-        q : "221b, Baker St, London ",
+        q : cityfind,
         format : "json",
     };
     $.ajax({
@@ -157,21 +158,34 @@ function Suivant(){
     mapleeflet();
 }
 
-function streetviewgenerator(){
-    $.ajax({
-        url : "https://random-ize.com/random-map/map-f.php", 
-        method : "GET",
-        dataType : "JSON",
-        beforeSend: function(xhr){
-            xhr.setRequestHeader ("Authorization", "Basic" + btoa(""));
-        },
-        success: function(retour){
-           console.log(retour);
-        },
-        error : function() {
-            alert("PB avec l'URL");
-        }	
-    });
+function streetviewgenerator() {
+    var api = "https://random-ize.com/random-map/map-f.php";
+
+    $.ajax({ 
+        type: 'GET', 
+        url: api, 
+        crossDomain: true, 
+        dataType: "html", 
+        cache: false,
+        success: function(data) {
+            cityfind = $(data).find('iframe').prevObject[0].textContent;
+            var generatedIframe = $(data).find('iframe').prevObject[1].attributes.src.nodeValue;
+            $("#googlemapados").append(`
+            <iframe allowtransparency="true" id="googlemap" class="h-screen w-screen"
+            src="${generatedIframe}"
+            frameborder="0">
+            </iframe>`);
+
+            console.log(cityfind);
+           
+
+        }, 
+        error: function() { 
+          console.log(arguments); 
+        } 
+      });
+
+      
 }
 
 
