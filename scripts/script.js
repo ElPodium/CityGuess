@@ -150,6 +150,7 @@ function ProchainTour(){
     map.removeLayer(markers[0]);
     markers.splice(0, 1);
     confirmerButton.innerText = "Confirmer";
+    streetviewgenerator();
     Suivant();
 }
 
@@ -159,6 +160,8 @@ function Suivant(){
 }
 
 function streetviewgenerator() {
+    $('iframe').remove();
+
     var api = "https://random-ize.com/random-map/map-f.php";
 
     $.ajax({ 
