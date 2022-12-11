@@ -14,11 +14,10 @@
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
         crossorigin=""></script>
-        <script src="math.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="./scripts/script.js"></script>
+        <script src="./scripts/game.js" defer></script>
     </head>
-  <body onload="main()">
+  <body>
     <div>
         <div class="flex items-start justify-start">
             <div class="absolute border-2 border-#BBCBC4-400 bg-white z-2 mr-4 rounded">
@@ -27,7 +26,8 @@
                 </div>
             </div>
         </div>
-        <div class="flex items-start justify-end">
+        
+        <div id = "Leaflets" class="flex items-start justify-end">
                 <button type="button" id="minus" class="absolute cursor-pointer rounded-full border-2 border-white px-3 py-1 text-black font-medium text-lg leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out">-</button>
                 <div id = "BlockLeaf"class="hide absolute border-2 border-#BBCBC4-400 bg-white bg-opacity-75 mt-8 z-2 px-4 py-2 w-96 mr-4 rounded">
                     <p id = "tour"class="text-center text-m py-2 px-1">Tour n°1</p>
@@ -49,6 +49,15 @@
     <div id="googlemapados">
 
     </div>
-    
+    <div id = "Annulation" class="flex items-end justify-start">
+        <div class="hide absolute px-4 py-2">
+        <div class="flex justify-start">
+            <a href="./index.html">
+            <button type="button" id="annuler" class="cursor-pointer rounded-lg border-2 border-red-600  bg-red-600 px-8 py-2.5 text-black font-medium text-lg leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out">Quitter</button>
+            </a>
+        
+        </div>
+    </div>
+ </div>
   </body>
 </html>
