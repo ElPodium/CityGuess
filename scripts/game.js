@@ -10,6 +10,7 @@ var distances;
 var markers = new Array();
 
 function main(){
+    document.getElementById("VilleInformation").style.visibility = "hidden";
     streetviewgenerator();
     map = L.map('map').setView([51.505, -0.09], 7);
     moinButton = document.getElementById("minus");
@@ -110,20 +111,72 @@ function DistanceVille(from, to)
     score += Math.round(resultat);
     document.getElementById("Scorer").innerText = "Score : " + score;
     confirmerButton.innerText = "Prochain"
-    confirmerButton.addEventListener("click", ProchainTour);
+    VilleData();
+}
+
+function VilleData(){
+var url = "https://us1.locationiq.com/v1/reverse?accept-language=en";
+var datas = {
+    key : "pk.938afe8c6000b6dd94d2262604cb7ebb",
+    lat : markers[1]._latlng.lat,
+    lon : markers[1]._latlng.lng,
+    format : "json",
+};
+$.ajax({
+    url: url,
+    data: datas,
+    method:"GET",
+    dataType:"JSON",
+    success: function(retour){
+       var ville = retour.address.state;
+       var contry = retour.address.country;
+       var url2 = "https://api.api-ninjas.com/v1/country";
+       var data = {
+        name : contry,
+       };
+       $.ajax({
+        url: url2,
+        headers: {"X-Api-Key":"mYkeMO9jtOXYwvYJXs307A==pFU8GxKOTAXtASie"},
+        data: data,
+        method:"GET",
+        dataType:"JSON",
+        success: function(retour){
+            if (ville == undefined) {
+                ville = retour[0].capital;
+            }
+            var pop = retour[0].population * 1000;
+            var tourist = retour[0].tourists * 1000;
+            document.getElementById("VilleInformation").style.visibility = "visible";
+            document.getElementById("InfoVille").innerHTML = '<p class="text-xl text-center py-2">Détails a propos du pays</p>'+'<p class="py-2">Pays : '+contry+'</p>'+'<p class="py-2">Capital : '+retour[0].capital+'</p>'+'<p class="py-2">Ville à trouver : '+ ville +'</p>'+'<p class="py-2">latitude : '+ markers[1]._latlng.lat +'</p>'+'<p class="py-2">latitude : '+ markers[1]._latlng.lng +'</p>'+'<p class="py-2">Devises : '+ retour[0].currency.name+'</p>'+'<p class="py-2">Population : '+ pop + ' habitants</p>'+'<p class="py-2">Touristes : '+ tourist + '</p>'+'<p class="py-2">Emission de CO2 : '+ retour[0].co2_emissions  + ' tonnes par an</p>'+`<p class="py-2">Utilisateur d'internet : ` + retour[0].internet_users
+            + ' %</p>';
+            confirmerButton.addEventListener("click", ProchainTour);
+        },
+        error : function(){
+            alert("erreur url 2");
+        }
+    });  
+         },
+         error : function() {
+             alert("error");
+         },
+     error:function() {
+         alert("error");
+     }	
+});
 }
 
 function ProchainTour(){
+    confirmerButton.removeEventListener("click", ProchainTour);
     tour += 1;
     document.getElementById("tour").innerText = "Tour n°" + tour;
     document.getElementById("distance").innerText = "Distance : 0 km";
-    console.log(markers.length);
     for(var i = 0; i < markers.length; i++){
         map.removeLayer(markers[i]);
         markers.splice(i, 1);
     }
     map.removeLayer(markers[0]);
     markers.splice(0, 1);
+    document.getElementById("VilleInformation").style.visibility = "hidden";
     confirmerButton.innerText = "Confirmer";
     Suivant();
 }
