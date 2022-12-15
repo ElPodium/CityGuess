@@ -147,7 +147,7 @@ $.ajax({
             var pop = retour[0].population * 1000;
             var tourist = retour[0].tourists * 1000;
             document.getElementById("VilleInformation").style.visibility = "visible";
-            document.getElementById("InfoVille").innerHTML = '<p class="text-xl text-center py-2">Détails a propos du pays</p>'+'<p class="py-2">Pays : '+contry+'</p>'+'<p class="py-2">Capital : '+retour[0].capital+'</p>'+'<p class="py-2">Ville à trouver : '+ ville +'</p>'+'<p class="py-2">latitude : '+ markers[1]._latlng.lat +'</p>'+'<p class="py-2">latitude : '+ markers[1]._latlng.lng +'</p>'+'<p class="py-2">Devises : '+ retour[0].currency.name+'</p>'+'<p class="py-2">Population : '+ pop + ' habitants</p>'+'<p class="py-2">Touristes : '+ tourist + '</p>'+'<p class="py-2">Emission de CO2 : '+ retour[0].co2_emissions  + ' tonnes par an</p>'+`<p class="py-2">Utilisateur d'internet : ` + retour[0].internet_users
+            document.getElementById("InfoVille").innerHTML = '<p class="text-xl text-center py-2">Détails a propos du pays</p>'+'<p class="py-2">Pays : '+contry+'</p>'+'<p class="py-2">Capital : '+retour[0].capital+'</p>'+'<p class="py-2">Ville à trouver : '+ ville +'</p>'+'<p class="py-2">latitude : '+ markers[1]._latlng.lat +'</p>'+'<p class="py-2">longitude : '+ markers[1]._latlng.lng +'</p>'+'<p class="py-2">Devises : '+ retour[0].currency.name+'</p>'+'<p class="py-2">Population : '+ pop + ' habitants</p>'+'<p class="py-2">Touristes : '+ tourist + '</p>'+'<p class="py-2">Emission de CO2 : '+ retour[0].co2_emissions  + ' tonnes par an</p>'+`<p class="py-2">Utilisateur d'internet : ` + retour[0].internet_users
             + ' %</p>';
             confirmerButton.addEventListener("click", ProchainTour);
         },
