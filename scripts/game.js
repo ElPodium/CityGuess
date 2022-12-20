@@ -241,4 +241,35 @@ function streetviewgenerator() {
       });
 }
 
+
+function saveScore() {
+    data = {}
+    data.username = $("#username").text();
+    data.score = score;
+    data.mode = "Random";
+    
+    var islogged = $("#islogged").text();
+
+    if (islogged == "true") {
+        data.username = "Guest";
+    } 
+
+    $.ajax({
+        url: "../scoreboard.php",
+        data: data,
+        type: "POST",
+        dataType: "html",
+        success: function(res) {
+            alert("Partie enregistrée dans le Scoreboard!");
+            window.location.href=window.location;
+        }, 
+        
+        error: function() {
+            console.log("error");
+        } 
+
+    });
+    
+}
+
 main();

@@ -30,16 +30,6 @@
                         clip-rule="evenodd"></path>
                 </svg>
             </button>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-multi-level">
-                <button
-                    class="border border-white bg-transparent hover:bg-black hover:bg-opacity-10 text-white font-bold hover:text-white py-2 px-4 rounded">
-                    <a href="../login.php">Sign In</a>
-                </button>
-                <button
-                    class=" border-[#54466d] border hover:text-white text-white font-bold py-2 px-4 bg-[#54466d] bg-opacity-90 rounded hover:text-[#54466d] hover:bg-transparent ">
-                    <a href="../signup.php">Sign Up</a>
-                </button>
-            </div>
         </div>
     </nav>
 

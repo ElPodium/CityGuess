@@ -19,10 +19,8 @@
             $_SESSION['islogged'] = true;
             header("Location: /");
         } else {
-            echo "bad password you bitch";
+            echo "bad password";
         }
-
-        echo $username . " " . $password;
     }
 
     function get_password($login) {

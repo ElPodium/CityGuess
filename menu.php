@@ -3,5 +3,4 @@
 
 	require("./templates/menu.tpl");
 
-
 ?>

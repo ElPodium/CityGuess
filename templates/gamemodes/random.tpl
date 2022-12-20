@@ -46,18 +46,23 @@
          </div>
          </div>
 
+    <div id = "Annulation" class="flex items-end justify-start">
+        
+        <div class="flex justify-start">
+            <a href="./menu.php">
+            <button type="button" id="annuler" class="cursor-pointer rounded-lg border-2 border-red-600  bg-red-600 px-4 py-2.5 text-white font-medium text-base leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out">Quitter</button>
+            </a>
+            <button type="button" onclick="saveScore();" class="cursor-pointer rounded-lg border-2 border-red-600  bg-red-600 px-4 py-2.5 text-white font-medium text-base leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out">Enregister le score</button>
+        </div>
+    </div>
+
     <div id="googlemapados">
 
     </div>
-    <div id = "Annulation" class="flex items-end justify-start">
-        <div class="absolute px-4 py-2">
-        <div class="flex justify-start">
-            <a href="./index.html">
-            <button type="button" id="annuler" class="cursor-pointer rounded-lg border-2 border-red-600  bg-red-600 px-4 py-2.5 text-white font-medium text-base leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out">Quitter</button>
-            </a>
-        
-        </div>
-    </div>
+
+    <p class="hidden" id="username"><?php echo $_SESSION['username'];?></p>
+    <p class="hidden" id="islogged"><?php echo $_SESSION['islogged'];?></p>
+    
  </div>
   </body>
 </html>
