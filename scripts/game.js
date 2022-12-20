@@ -65,6 +65,30 @@ function onMapClick(e) {
     confirmerButton.addEventListener("click", VilleAtrouver);
 }
 
+
+// function pour regen lorsque qu'il y a un bug sur le nom de la ville, évite de regen après coup   
+function checkVilleOK() {
+    var url2 = "https://us1.locationiq.com/v1/search"
+    var datas = {
+        key : "pk.938afe8c6000b6dd94d2262604cb7ebb",
+        q : cityfind,
+        format : "json",
+    };
+    $.ajax({
+        url: url2,
+        data: datas,
+        method:"GET",
+        dataType:"JSON",
+        success: function(retour){
+            console.log("ok ville correcte");
+         },
+         error : function() {
+             console.log("eat the bug, regen city...");
+             streetviewgenerator()
+         }	
+    });
+}
+
 function VilleAtrouver(){
     map.removeEventListener("click", onMapClick);
     var url2 = "https://us1.locationiq.com/v1/search"
@@ -209,10 +233,12 @@ function streetviewgenerator() {
             </iframe>`);
 
             console.log(cityfind);
+            checkVilleOK()
         }, 
         error: function() { 
           console.log(arguments); 
         } 
       });
 }
+
 main();
