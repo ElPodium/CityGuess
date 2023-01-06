@@ -42,7 +42,7 @@
             <h1 class="text-2xl text-white z-20  font-bold pb-4 uppercase">Welcome to City Guess</h1>
             <div>
                 <button type="button" id='startGame' class="cursor-pointer rounded-lg border-2 border-gray-200  px-8 py-2.5 text-white font-medium text-lg leading-tight uppercase rounded hover:bg-black hover:bg-opacity-10 hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out"> <a href="../menu.php">Play as a guest</a></button>
-                <button type="button" id='startGame' class="cursor-pointer rounded-lg hover:font-bold border-2 border-[#54466d] bg-[#54466d]  px-8 py-2.5 text-white font-medium text-lg leading-tight uppercase rounded hover:bg-transparent hover:text-[#54466d] hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out"> <a href="game.html">Sign in</a></button>
+                <button type="button" id='startGame' class="cursor-pointer rounded-lg hover:font-bold border-2 border-[#54466d] bg-[#54466d]  px-8 py-2.5 text-white font-medium text-lg leading-tight uppercase rounded hover:bg-transparent hover:text-[#54466d] hover:shadow-lg active:shadow-lg transition duration-150 ease-in-out"> <a href="../login.php">Sign in</a></button>
             </div>
             
         </div>
